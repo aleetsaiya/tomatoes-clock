@@ -41,8 +41,7 @@ const Clock = (function(){
         offset: {
             x: 0, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
             y: '3em' // vertical axis - can be a number or a string indicating unity. eg: '2em'
-            },
-        stopOnFocus: true, // Prevents dismissing of toast on hover
+        },
     });
 
     function init() {
@@ -264,7 +263,7 @@ const Pages = (function() {
         const pageName = this.textContent.toLowerCase();
 
         navLinks.map(navLink => {
-            if(navLink.textContext === this.textContent)
+            if(navLink.textContent === this.textContent)
                 navLink.classList.add('active');
             else
                 navLink.classList.remove('active');
