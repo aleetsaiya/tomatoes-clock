@@ -1,0 +1,86 @@
+---
+layout: false
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm Clock -Alee Code</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+    
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="https://aleetsaiya.github.io/">Alee Codes</a>
+        <div class="navbar-nav" id="navbar-nav">
+            <a class="nav-link active" href="#">Clock</a>
+            <a class="nav-link " href="#">Todo</a>
+            <a class="nav-link " href="#">Record</a>
+        </div>
+    </nav>
+    <!-- Alarm Clock -->
+    <div class="alarm-clock page" data-page='clock'>
+        <h3>Tomato Clock</h3>
+        <span>25:00</span>
+        <section>
+            <div class="timmer custom-row">
+                <button class="btn btn-sm btn-dark" data-time="5" data-name="study">Study</button>
+                <button class="btn btn-sm btn-dark" data-time="3" data-name="rest">Rest</button>
+                <!-- controls id 可以刪掉 -->
+                <span id="playpause" class="controls" data-name="playpause">▶️</span>
+                <span id="mute" class="controls" data-name="muted">🔔</span>
+                <audio src="alarm.mp3"></audio>
+            </div>
+        </section>
+        <section class="custom-progress-bar">
+            <div class="custom-progress">
+                <div class="custom-bar">
+                    <span class="percent">
+                        0%
+                    </span>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- Todo -->
+    <div class="todo page" data-page='todo'>
+        <h3>Todo List</h3>
+        <p>List things you want to do today! 😀</p>
+        <div class="custom-row">
+            <input class="input" type="text">
+            <button class="btn btn-sm" id="send">+</button>
+        </div>
+        <div class="alert alert-warning" style="display: none;">
+            <i class="fas fa-exclamation-circle"></i>
+            Already have the same target in the list.
+        </div>
+        <div class="item-list">
+            <div class="item custom-row">
+                <i class="far fa-circle"></i>
+                <span>do homework</span>
+                <i class="far fa-trash-alt delete"></i>
+            </div>
+        </div>
+    </div>
+    <!-- Record -->
+    <div class="record page" data-page="record">
+        <h3>Record</h3>
+        <p>Show all tomatoes you get ! And the data is stored on localStorage. So being careful to clear the browser history.</p>
+        <div class="custom-row">
+            <span class="tomatoes">Total: 🍅 x 100</span>
+        </div>
+    </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="index.js"></script>
+</html>
