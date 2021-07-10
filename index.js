@@ -35,7 +35,7 @@ const Clock = (function(){
 
     const toastify = Toastify({
         text: "",
-        duration: 3000, // 3 secs
+        duration: 1500, // 3 secs
         backgroundColor: '#dc3545', 
         close: true,
         offset: {
