@@ -182,8 +182,6 @@ const TodoList = (function() {
     function init() {
         const sample = [
             {text: 'do homework', done: true, expand: false, tomatoes: 1},
-            {text: 'go swimming', done: false, expand: false, tomatoes: 2},
-            {text: 'programming', done: false, expand: true, tomatoes: 3},
         ];
         items = JSON.parse(localStorage.getItem('items')) || sample;
         renderItems();
@@ -282,7 +280,8 @@ const TodoList = (function() {
         );
 
         e.target.classList.contains('plus') ? item.tomatoes += 1 : item.tomatoes -= 1;
-        console.log(item.tomatoes);
+        if (item.tomatoes > 8)
+            item.tomatoes = 8;
         if (item.tomatoes === 0)
             item.done = true;
         localStorage.setItem('items', JSON.stringify(items));
