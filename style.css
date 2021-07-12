@@ -20,16 +20,9 @@ body {
     flex-direction: row;
 }
 
-.alarm-clock > h3 {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
-}
-
-.alarm-clock > span {
-    font-size: 35px;
-    display: flex;
-    justify-content: center;
+.navbar {
+    background-color: #e5e5e5;
+    width: 100vw;
 }
 
 .nav-link {
@@ -40,11 +33,6 @@ body {
     display: flex;
     justify-self: center;
     align-items: center;
-}
-
-.navbar {
-    background-color: #e5e5e5;
-    width: 100vw;
 }
 
 .page {
@@ -61,6 +49,23 @@ body {
 
 .alarm-clock {
     transform: translateX(-50%);
+}
+
+.alarm-clock > h3 {
+    display: flex;
+    justify-content: center;
+}
+
+.alarm-clock > span {
+    font-size: 35px;
+    display: flex;
+    justify-content: center;
+}
+
+.alarm-clock > small {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
 }
 
 .custom-progress-bar .custom-progress {
@@ -138,12 +143,10 @@ body {
 
 .item-list {
     margin-top: 20px;
-    overflow: hidden;
 }
 
 .item {
     position: relative;
-    cursor: pointer;
     max-width: 250px;
     padding: 8px;
     margin-bottom: 20px;
@@ -151,19 +154,46 @@ body {
 }
 
 
-.item > span {
-    margin-left: 8px;
+.item > .item-up> span {
     margin-right: 20px;
 }
 
-.item > span.clear {
-    text-decoration: line-through;
+.item > .item-up > .circle {
+    cursor: pointer;
+    padding: 8px;
 }
 
-.item > .delete {
+.item > .item-up > .expand {
     position: absolute;
     right: 5px;
-    padding: 5px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.item > .item-down {
+    display: none;
+}
+
+.item > .item-down.show {
+    display: block;
+}
+
+.item > .item-down .tomatoes {
+    cursor: pointer;
+    padding: 3px;
+}
+
+.item > .item-down > .delete{
+    position: absolute;
+    right: 5px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.item > .item-down > .plus {
+    margin-left: 3px;
+    padding: 3px;
+    cursor: pointer;
 }
 
 .alert {

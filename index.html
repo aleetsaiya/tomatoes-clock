@@ -34,7 +34,7 @@ layout: false
                 <button class="btn btn-sm btn-dark" data-time="3" data-name="rest">Rest</button>
                 <span class="controls" data-name="playpause">▶️</span>
                 <span class="controls" data-name="muted">🔔</span>
-                <audio src="alarm.mp3"></audio>
+                <audio src="Tokyo.mp3"></audio>
             </div>
         </section>
         <section class="custom-progress-bar">
@@ -46,6 +46,7 @@ layout: false
                 </div>
             </div>
         </section>
+        <small>Music by:<a href="https://www.fiftysounds.com" target="_blank">FiftySounds</a></small>
     </div>
     <!-- Todo -->
     <div class="todo page" data-page='todo'>
@@ -60,10 +61,17 @@ layout: false
             Already have the same target in the list.
         </div>
         <div class="item-list">
-            <div class="item custom-row">
-                <i class="far fa-circle"></i>
-                <span>do homework</span>
-                <i class="far fa-trash-alt delete"></i>
+            <div class="item">
+                <div class="item-up custom-row">
+                    <i class="far fa-circle circle"></i>
+                    <span>do homework</span>
+                    <i class="fas fa-chevron-down expand"></i>
+                </div>
+                <div class="item-down custom-row">
+                    <span class="tomatoes">🍅🍅🍅</span>
+                    <i class="fas fa-plus fa-xs plus"></i>
+                    <i class="far fa-trash-alt delete"></i>
+                </div>
             </div>
         </div>
     </div>
@@ -72,7 +80,7 @@ layout: false
         <h3>Record</h3>
         <p>Show all tomatoes you get ! And the data is stored on localStorage. So being careful to clear the browser history.</p>
         <div class="custom-row">
-            <span class="tomatoes">Total: 🍅 x 100</span>
+            <span class="tomatoesDisplay">Total: 🍅 x 1</span>
         </div>
     </div>
 </body>

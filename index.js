@@ -20,7 +20,7 @@ const Clock = (function(){
         }
     
         function setTomatoes(number) {
-            const tomatoesDisplay = document.querySelector('.tomatoes');
+            const tomatoesDisplay = document.querySelector('.tomatoesDisplay');
             tomatoesNumber = number;
             localStorage.setItem("tomatoesNumber", tomatoesNumber);
             tomatoesDisplay.innerHTML = `Total: 🍅 x ${tomatoesNumber}`;
@@ -96,7 +96,6 @@ const Clock = (function(){
             return;
         }
 
-        // toggle
         if (name === 'playpause') isPause = !isPause;
         if (name === 'muted') isMuted = !isMuted;
         if (name === 'study' || name === 'rest'){
@@ -160,6 +159,7 @@ const Clock = (function(){
         if (isMuted) return;
 
         audio.currentTime = 0;
+        // audio.volume = 0.5;
         audio.play();
     }
 
@@ -180,18 +180,35 @@ const TodoList = (function() {
     let items;
 
     function init() {
-        const sample = [{text: 'do homework', done: false,},{text: 'go swimming', done: true,}];
+        const sample = [
+            {text: 'do homework', done: true, expand: false, tomatoes: 1},
+            {text: 'go swimming', done: false, expand: false, tomatoes: 2},
+            {text: 'programming', done: false, expand: true, tomatoes: 3},
+        ];
         items = JSON.parse(localStorage.getItem('items')) || sample;
         renderItems();
     }
     
     function renderItems() {
-        itemList.innerHTML = items.map(item => 
-                `<div class="item custom-row">
-                    <i class="${item.done? 'far fa-check-circle': 'far fa-circle'}"></i>
-                    <span class="${item.done? 'clear' : ''}">${item.text}</span>
-                    <i class="far fa-trash-alt delete"></i>
-                </div>`
+        itemList.innerHTML = items.map(item => {
+            const check = `<i class="${item.done? 'far fa-check-circle circle': 'far fa-circle circle'}"></i>`;
+            const expand = `<i class="${item.expand?"fas fa-chevron-up expand":"fas fa-chevron-down expand"}"></i>`;
+            const tomatoes = `<span class="tomatoes">${item.tomatoes > 0 ? '🍅'.repeat(item.tomatoes):'🏆 Congrats~'}</span>`;
+            const control = `
+            <i class="fas fa-plus fa-xs plus"></i>
+            <i class="far fa-trash-alt delete"></i>`;
+            return (`<div class="item">
+                <div class="item-up custom=row">
+                    ${check}
+                    <span>${item.text}</span>
+                    ${expand}
+                </div>
+                <div class="${item.expand?"item-down custom-rwo show":"item-down custom-rwo"}">
+                    ${tomatoes}
+                    ${control}
+                </div>
+            </div>`);
+            }
         ).join('');
     }
     
@@ -209,8 +226,10 @@ const TodoList = (function() {
             alert.style.display = 'none';
     
         const item = {
-            text: input.value,
-            done: false
+            text: input.value.trim(),
+            done: false,
+            expand: false,
+            tomatoes: 1
         }
         items.push(item);
         localStorage.setItem('items', JSON.stringify(items));
@@ -219,28 +238,53 @@ const TodoList = (function() {
     }
     
     function deleteItem(e) {
-        if (e.target.className !== 'far fa-trash-alt delete')  return;
-    
-        const node = items.find(item => 
-            item.text === e.target.parentNode.textContent.trim()
+        if (!e.target.classList.contains('delete'))  return;
+        
+        const contentTarget = e.target.parentNode.parentNode.querySelector('.item-up');
+        const item = items.find(item => 
+            item.text === contentTarget.textContent.trim()
         );
-        items.splice(items.indexOf(node), 1);
+        items.splice(items.indexOf(item), 1);
         localStorage.setItem('items', JSON.stringify(items));
         renderItems();
     }
     
     function doneItem(e) {
-        try{
-            const node = items.find(item => 
-                item.text === e.target.textContent.trim()
-            );
-            node.done = !node.done;
-        }catch {
-            const node = items.find(item => 
-                item.text === e.target.parentNode.textContent.trim()
-            );
-            node.done = !node.done;
-        }
+        if (!e.target.classList.contains('circle')) return;
+
+        const contentTarget = e.target.parentNode.parentNode.querySelector('.item-up');
+        const item = items.find(item => 
+            item.text === contentTarget.textContent.trim()
+        );
+        item.done = !item.done;
+        localStorage.setItem('items', JSON.stringify(items));
+        renderItems();
+    }
+
+    function expandItem(e) {
+        if (!e.target.classList.contains('expand'))  return;
+
+        const contentTarget = e.target.parentNode;
+        const item = items.find(item => 
+            item.text === contentTarget.textContent.trim()
+        );
+        item.expand = !item.expand;
+        localStorage.setItem('items', JSON.stringify(items));
+        renderItems();
+    }
+
+    function handleTomatoes(e) {
+        if (!e.target.classList.contains('tomatoes') && !e.target.classList.contains('plus'))  return;
+
+        const contentTarget = e.target.parentNode.parentNode.querySelector('.item-up');
+        const item = items.find(item => 
+            item.text === contentTarget.textContent.trim()
+        );
+
+        e.target.classList.contains('plus') ? item.tomatoes += 1 : item.tomatoes -= 1;
+        console.log(item.tomatoes);
+        if (item.tomatoes === 0)
+            item.done = true;
         localStorage.setItem('items', JSON.stringify(items));
         renderItems();
     }
@@ -249,6 +293,8 @@ const TodoList = (function() {
     send.addEventListener('click', addItems);
     itemList.addEventListener('click', doneItem);
     itemList.addEventListener('click', deleteItem);
+    itemList.addEventListener('click', expandItem);
+    itemList.addEventListener('click', handleTomatoes);
 
     return {
         init: init
@@ -258,26 +304,39 @@ const TodoList = (function() {
 const Pages = (function() {
     const pages = [...document.querySelectorAll('[data-page]')];
     const navLinks = [...document.querySelectorAll('.navbar-nav > .nav-link')];
+    let currentPage;
 
-    function changePage() {
+    function init() {
+        currentPage = localStorage.getItem('currentPage') || 'clock';
+        changePage(currentPage);
+    }
+
+    function onChange() {
         const pageName = this.textContent.toLowerCase();
+        changePage(pageName);
+    }
 
-        navLinks.map(navLink => {
-            if(navLink.textContent === this.textContent)
-                navLink.classList.add('active');
-            else
-                navLink.classList.remove('active');
-        });
+    function changePage(pageName) {
         pages.map(page => {
-            if (page.dataset.page === pageName)
+            if (page.dataset.page === pageName){
+                localStorage.setItem('currentPage', page.dataset.page);
                 page.style.transform = 'translateX(-50%)';
+                navLinks.map(navLink => {
+                    navLink.textContent.toLowerCase() === pageName ?
+                     navLink.classList.add('active') : navLink.classList.remove('active');
+                });
+            }
             else
                 page.style.transform = 'translateX(-150vw)';
         });
     }
 
-    navLinks.forEach(navLink => navLink.addEventListener('click', changePage));
+    navLinks.forEach(navLink => navLink.addEventListener('click', onChange));
+    return {
+        init: init
+    };
 })();
 
 Clock.init();
 TodoList.init();
+Pages.init();
