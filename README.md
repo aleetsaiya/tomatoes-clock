@@ -1,5 +1,7 @@
 # Potatoes Clock
 
+作品網址 : [Potatoes Clock](https://aleetsaiya.github.io/clock/)
+
 ## 內容
 包含番茄鐘 ( 讀書 25 分鐘，休息 5 分鐘 ) 以及 todo-list 的實作，用於練習自己對 Javascript 的操作。
 
