@@ -140,7 +140,11 @@ const Clock = (function(){
     function displayTime(currentSeconds) {
         const minutes = Math.floor((currentSeconds / 60));
         const seconds = currentSeconds % 60;
-        timerDisplay.textContent = `${minutes > 10 ? minutes : '0' + minutes}:${seconds > 10 ? seconds : '0' + seconds}`;
+        if (minutes < 0)
+            minutes = 0;
+        if (seconds < 0)
+            seconds = 0;
+        timerDisplay.textContent = `${minutes >= 10 ? minutes : '0' + minutes}:${seconds >= 10 ? seconds : '0' + seconds}`;
     }
 
     function startTime() {
@@ -191,7 +195,7 @@ const TodoList = (function() {
         itemList.innerHTML = items.map(item => {
             const check = `<i class="${item.done? 'far fa-check-circle circle': 'far fa-circle circle'}"></i>`;
             const expand = `<i class="${item.expand?"fas fa-chevron-up expand":"fas fa-chevron-down expand"}"></i>`;
-            const tomatoes = `<span class="tomatoes">${item.tomatoes > 0 ? '🍅'.repeat(item.tomatoes):'🏆 Congrats~'}</span>`;
+            const tomatoes = `<span class="tomatoes">${item.tomatoes > 0 ? '🍅'.repeat(item.tomatoes):'🏆 Congrats '}</span>`;
             const control = `
             <i class="fas fa-plus fa-xs plus"></i>
             <i class="far fa-trash-alt delete"></i>`;
@@ -282,8 +286,7 @@ const TodoList = (function() {
         e.target.classList.contains('plus') ? item.tomatoes += 1 : item.tomatoes -= 1;
         if (item.tomatoes > 8)
             item.tomatoes = 8;
-        if (item.tomatoes === 0)
-            item.done = true;
+        item.tomatoes === 0 ? item.done = true : item.done = false;
         localStorage.setItem('items', JSON.stringify(items));
         renderItems();
     }
