@@ -2,6 +2,11 @@
 
 作品網址 : [Potatoes Clock](https://aleetsaiya.github.io/clock/)
 
+_Alert sound from FiftySounds : [https://www.fiftysounds.com](https://www.fiftysounds.com)_
+
+_Background image from Unsplash : [https://unsplash.com/photos/u27Rrbs9Dwc](https://unsplash.com/photos/u27Rrbs9Dwc)_
+
+
 ## 內容
 包含番茄鐘 ( 讀書 25 分鐘，休息 5 分鐘 ) 以及 todo-list 的實作，用於練習自己對 Javascript 的操作。
 
