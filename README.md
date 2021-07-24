@@ -1,4 +1,4 @@
-# Potatoes Clock
+# Tomatoes clock
 
 作品網址 : [Potatoes Clock](https://aleetsaiya.github.io/clock/)
 
