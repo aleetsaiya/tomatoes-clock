@@ -1,6 +1,6 @@
-# Potatoes Clock
+# Tomatoes clock
 
-作品網址 : [Potatoes Clock](https://aleetsaiya.github.io/clock/)
+作品網址 : [Totatoes Clock](https://aleetsaiya.github.io/clock/)
 
 Alert sound from FiftySounds : [https://www.fiftysounds.com](https://www.fiftysounds.com)
 
