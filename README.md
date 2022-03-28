@@ -6,7 +6,7 @@
 This is my first Front-End side-project with html、css and Javascript when I was in college. This app has two main functions:
 
 1) Todo-list
-2) Count down timmer
+2) Countdown timmer
 
 ## Feature
 I try to use `localstorage` to store the data that the user input and make a Fade-in Fade-out animation when the user switches to a different page.
