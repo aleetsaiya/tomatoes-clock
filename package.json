@@ -1,0 +1,22 @@
+{
+  "name": "tomatoes-clock",
+  "version": "1.0.0",
+  "description": "my first javascript project",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "gh-pages -d build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aleetsaiya/tomatoes-clock.git"
+  },
+  "author": "alee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aleetsaiya/tomatoes-clock/issues"
+  },
+  "homepage": "https://github.com/aleetsaiya/tomatoes-clock#readme",
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
+  }
+}
